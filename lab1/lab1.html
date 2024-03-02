@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Przeliczanie</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+    }
+    input {
+        margin-bottom: 10px;
+    }
+    button {
+        padding: 8px 16px;
+        cursor: pointer;
+    }
+</style>
+</head>
+<body>
+
+<input type="text" id="value1" placeholder="Wartość 1"><br>
+<input type="text" id="value2" placeholder="Wartość 2"><br>
+<input type="text" id="value3" placeholder="Wartość 3"><br>
+<input type="text" id="value4" placeholder="Wartość 4"><br>
+<button id="calculateBtn">Przelicz</button><br>
+<div id="result"></div>
+
+<script>
+document.getElementById('calculateBtn').addEventListener('click', function() {
+    var values = [];
+    var sum = 0;
+    var min = Infinity;
+    var max = -Infinity;
+
+    // Pobieranie wartości z pól tekstowych
+    for (var i = 1; i <= 4; i++) {
+        var value = parseFloat(document.getElementById('value' + i).value);
+        if (!isNaN(value)) {
+            values.push(value);
+            sum += value;
+            if (value < min) min = value;
+            if (value > max) max = value;
+        }
+    }
+
+    // Obliczanie średniej
+    var average = sum / values.length;
+
+    // Wyświetlanie wyników
+    document.getElementById('result').innerHTML = "Suma: " + sum + "<br>";
+    document.getElementById('result').innerHTML += "Średnia: " + average + "<br>";
+    document.getElementById('result').innerHTML += "Min: " + (min === Infinity ? "Brak danych" : min) + "<br>";
+    document.getElementById('result').innerHTML += "Max: " + (max === -Infinity ? "Brak danych" : max);
+});
+</script>
+
+</body>
+</html>
